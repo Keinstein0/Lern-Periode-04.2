@@ -18,16 +18,19 @@ Heute habe ich ds unitiy framework kennengelernt und mich zu beginn in die Logik
 
 ## 21.2: Explorativer Wegwerf-Prototyp
 
-- [ ] Objektstruktur Definieren (Analog)
-- [ ] Neues Repo Erstellen
-- [ ] Einfaches Pong Erstellen
+- [X] Objektstruktur Definieren (Analog)
+- [X] Neues Repo Erstellen
+- [X] Einfaches Pong Erstellen
 - [ ] Kartentexturen besorgt
 
-✍️ Heute habe ich... (50-100 Wörter)
-
-☝️ Vergessen Sie nicht, bis einen ersten Code auf github hochzuladen
+Heute habe ich eine Software installiert, mit der ich Unity einfacher mit GitHub verlinken kann. Zudem konnte ich ein simples 2D pong erstellen, was gute vorbereitung für das Fertige Tichu sein sollte. Leider kam ich nicht dazu schon die texturen für die Karten zu importieren. Das ist jedoch sowieso keine grosse Aufgabe. Ich habe ausserdem für das Tichu die struktur der Software geplant.
 
 ## 28.2: Kern-Funktionalität
+
+- [ ] Hintergrund und Karten importiert
+- [ ] Karten dynamisch Erzeugen
+- [ ] Card Class Fertig
+- [ ] Erster Entwurf Cardstack Class
 
 ## 7.3: Kern-Funktionalität
 
