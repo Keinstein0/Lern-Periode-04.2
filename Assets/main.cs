@@ -7,11 +7,15 @@ public class main : MonoBehaviour
     public GameObject[] cards = new GameObject[56];
     public GameObject cardTemplate;
     public Sprite[] cardTextures = new Sprite[56];
+    public string[] cardNames = new string[56];
+    public int[] cardValues = new int[56];
 
 
     private string[] colors = { "rot", "blau", "gruen", "schw" };
     private string[] values = { "2", "3", "4", "5", "6", "7", "8", "9", "t", "j", "q", "k", "a" };
     private string[] specialCards = { "mahjong", "phoenix", "dog", "dragon" };
+
+    private string[] actualColors = { "red", "blue", "green", "black" };
 
 
     void Start()
@@ -29,12 +33,14 @@ public class main : MonoBehaviour
             if (cScript != null)
             {
                 cScript.cardTexture = cardTextures[i]; // Store the assigned sprite
+                cScript.name = cardNames[i];
+                cScript.value = cardValues[i];
             }
 
 
 
 
-            cards[i].gameObject.GetComponent<SpriteRenderer>().sprite = cardTextures[i];
+            
         }
     }
     // Update is called once per frame
@@ -44,7 +50,7 @@ public class main : MonoBehaviour
     }
 
 
-    void LoadCards()
+    void LoadCards() //Made by GPT because it's boring and mind-numbing
     {
         int index = 0;
 
@@ -55,6 +61,9 @@ public class main : MonoBehaviour
             {
                 string path = $"Sprites/cardImages/{color}{value}";
                 Sprite sprite = Resources.Load<Sprite>(path);
+
+                cardValues[index] = index % 13 + 2;
+                cardNames[index] = $"{color}-{value}"; 
 
                 if (sprite != null)
                 {
@@ -82,6 +91,14 @@ public class main : MonoBehaviour
             else
             {
                 Debug.LogWarning($"Sprite not found: {path}");
+            }
+
+            cardNames[index] = specialCard;
+            cardValues[index] = 0;
+
+            if (specialCard == "dragon")
+            {
+                cardValues[index] = 15;
             }
 
             index++;
