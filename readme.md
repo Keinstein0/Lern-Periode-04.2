@@ -32,7 +32,13 @@ Heute habe ich eine Software installiert, mit der ich Unity einfacher mit GitHub
 - [X] Card Class Fertig
 - [ ] Erster Entwurf Cardstack Class
 
+Heute konnte ich einiges über die funktionalität von Prefabs lernen. So konnte ich meine Karten mit dynamischen texturen und namen erstellen. Zur cardstack class bin ich noch nicht gekommen, denn es brauchte überraschend viel zeit den Hintergrund und die Karten zu importieren. Mein nächster schritt wird die Implementierung der Cardstack class. Dies jedoch wird viel zeit in anspruch nehmen.
 ## 7.3: Kern-Funktionalität
+
+- [ ] Cardstack Class Fertig (Teil I)
+- [ ] Cardstack Class Fertig (Teil II)
+- [ ] Spieler mit Inventaren Erstellt
+- [ ] Haupt Cardstack erstellt
 
 ## 14.3: Architektur ausbauen
 
