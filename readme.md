@@ -21,15 +21,15 @@ Heute habe ich ds unitiy framework kennengelernt und mich zu beginn in die Logik
 - [X] Objektstruktur Definieren (Analog)
 - [X] Neues Repo Erstellen
 - [X] Einfaches Pong Erstellen
-- [ ] Kartentexturen besorgt
+- [X] Kartentexturen besorgt
 
 Heute habe ich eine Software installiert, mit der ich Unity einfacher mit GitHub verlinken kann. Zudem konnte ich ein simples 2D pong erstellen, was gute vorbereitung für das Fertige Tichu sein sollte. Leider kam ich nicht dazu schon die texturen für die Karten zu importieren. Das ist jedoch sowieso keine grosse Aufgabe. Ich habe ausserdem für das Tichu die struktur der Software geplant.
 
 ## 28.2: Kern-Funktionalität
 
-- [ ] Hintergrund und Karten importiert
-- [ ] Karten dynamisch Erzeugen
-- [ ] Card Class Fertig
+- [X] Hintergrund und Karten importiert
+- [X] Karten dynamisch Erzeugen
+- [X] Card Class Fertig
 - [ ] Erster Entwurf Cardstack Class
 
 ## 7.3: Kern-Funktionalität
