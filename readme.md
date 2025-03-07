@@ -43,7 +43,7 @@ Heute konnte ich einiges über die funktionalität von Prefabs lernen. So konnte
 Heute erstellte ich die Cardstack klasse. Jetzt gerade habe ich versucht von einem zum nächsten Cardstack zu buchen. Dies jedoch ist aus irgendeinem grund Defekt. Die pull funktion ist jedoch erfolgreich getestet und funktioniert. Zudem habe ich alle karten die in einem stapel nicht sichtbar sind versteckt.
 
 ## 14.3: Architektur ausbauen
-- [ ] Cardstack Pull Bug Fixen
+- [ ] Cardstacks anzeige variabel
 - [ ] Players erstellen
 - [ ] Karten verteilen lassen
 - [ ] Combination Class machen
