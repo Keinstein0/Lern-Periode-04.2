@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.TextCore.Text;
 using static UnityEngine.Rendering.DebugUI;
 
 public class main : MonoBehaviour
@@ -6,6 +8,7 @@ public class main : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject[] cards = new GameObject[56];
     public GameObject cardTemplate;
+    public GameObject stackTemplate;
     public Sprite[] cardTextures = new Sprite[56];
     public string[] cardNames = new string[56];
     public int[] cardValues = new int[56];
@@ -36,13 +39,48 @@ public class main : MonoBehaviour
                 cScript.name = cardNames[i];
                 cScript.value = cardValues[i];
             }
-
-
-
-
-            
         }
+
+        // DEBUGGING STUFF
+
+        GameObject stack = Instantiate(stackTemplate, new Vector2(-1, 0), Quaternion.identity);
+
+        stackScript sScript = stack.GetComponent<stackScript>();
+
+        GameObject stack2 = Instantiate(stackTemplate, new Vector2(0, -1), Quaternion.identity);
+
+        stackScript sScript2 = stack.GetComponent<stackScript>();
+
+
+        for (int i = 0; i < 20 ; i++)
+        {
+            GameObject copiedCard = cards[i];
+            cards[i] = null;
+
+
+
+            // Push the copied card into the stack
+            sScript.Push(copiedCard);
+        }
+        Debug.Log("We be here");
+
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject copiedCard = sScript.PullTop();
+
+            Debug.Log("Pulling: ", copiedCard.GetComponent<cardScript>());
+
+            // Push the copied card into the stack
+            sScript2.Push(copiedCard);
+        }
+
+
+
     }
+
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -50,7 +88,7 @@ public class main : MonoBehaviour
     }
 
 
-    void LoadCards() //Made by GPT because it's boring and mind-numbing
+    void LoadCards() //Made by GPT because it's boring and mind-numbing and boring
     {
         int index = 0;
 

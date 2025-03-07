@@ -15,11 +15,12 @@ public class cardScript : MonoBehaviour
     {
         hide,
         cover,
-        show
+        show,
+        onLaunch
     }
 
     public Visible isVisible;
-    private Visible isVisibleLast = Visible.hide;
+    private Visible isVisibleLast = Visible.onLaunch;
     
     
     
@@ -34,20 +35,20 @@ public class cardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isVisible != isVisibleLast)
+        if (isVisible != isVisibleLast || true)
         {
             switch (isVisible)
             {
                 case Visible.show:
-                    this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    this.gameObject.transform.localScale = new Vector3((float)1.375, (float)1.5, 1);
                     this.gameObject.GetComponent<SpriteRenderer>().sprite = cardTexture;
                     break;
                 case Visible.cover:
-                    this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    this.gameObject.transform.localScale = new Vector3((float)1.375, (float)1.5, 1);
                     this.gameObject.GetComponent<SpriteRenderer>().sprite = coveredTexture;
                     break;
                 case Visible.hide:
-                    this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                    this.gameObject.transform.localScale = new Vector3(0, 0, 0);
                     break;
             }
             
