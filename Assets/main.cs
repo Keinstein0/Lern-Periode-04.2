@@ -49,7 +49,7 @@ public class main : MonoBehaviour
 
         GameObject stack2 = Instantiate(stackTemplate, new Vector2(0, -1), Quaternion.identity);
 
-        stackScript sScript2 = stack.GetComponent<stackScript>();
+        stackScript sScript2 = stack2.GetComponent<stackScript>();
 
 
         for (int i = 0; i < 20 ; i++)
