@@ -38,7 +38,7 @@ Heute konnte ich einiges über die funktionalität von Prefabs lernen. So konnte
 - [ ] Cardstack Class Fertig (Teil I)
 - [ ] Cardstack Class Fertig (Teil II)
 - [ ] Spieler mit Inventaren Erstellt
-- [ ] Haupt Cardstack erstellt
+- [ ] ANCHORPOINT REPARIEREN!!!!!!!!!!!!!!!!!!!!
 
 ## 14.3: Architektur ausbauen
 
