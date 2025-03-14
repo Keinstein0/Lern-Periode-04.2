@@ -43,12 +43,20 @@ Heute konnte ich einiges über die funktionalität von Prefabs lernen. So konnte
 Heute erstellte ich die Cardstack klasse. Jetzt gerade habe ich versucht von einem zum nächsten Cardstack zu buchen. Dies jedoch ist aus irgendeinem grund Defekt. Die pull funktion ist jedoch erfolgreich getestet und funktioniert. Zudem habe ich alle karten die in einem stapel nicht sichtbar sind versteckt.
 
 ## 14.3: Architektur ausbauen
-- [ ] Cardstacks anzeige variabel
-- [ ] Players erstellen
-- [ ] Karten verteilen lassen
-- [ ] Combination Class machen
+- [X] Cardstacks anzeige variabel
+- [X] Players erstellen
+- [X] Karten verteilen lassen
+- [X] Combination Class machen
+
+Heute stellte ich die Architektur der Software mit allen Notwendigen Klassen zum speichern von karten fertig. Zudem konnte ich mit der Tatsächlichen umsetzung des weniger abstrakteren spiel teils beginnen. Hierfür konnte ich die Spieler erstellen und ihnen alle Karten vertelien. Ein weiterer interessanter teil wird das Spielen von karten, da es hierfür die möglichen Kombinationen kennen muss und nur gleiche Combinations stapeln lassen.
 
 ## 21.3: Architektur ausbauen
+- [ ] Kombinationen können im Inventar erstellt werden
+- [ ] Kombinationen werden validiert
+- [ ] Kombinationen Spielbar
+- [ ] Stich Holbar
+
+
 
 ## 28.3: Auspolieren
 
