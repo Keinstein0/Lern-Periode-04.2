@@ -9,6 +9,7 @@ public class main : MonoBehaviour
     public GameObject[] cards = new GameObject[56];
     public GameObject cardTemplate;
     public GameObject stackTemplate;
+    public GameObject combinationTemplate;
     public Sprite[] cardTextures = new Sprite[56];
     public string[] cardNames = new string[56];
     public int[] cardValues = new int[56];
@@ -62,7 +63,6 @@ public class main : MonoBehaviour
             // Push the copied card into the stack
             sScript.Push(copiedCard);
         }
-        Debug.Log("We be here");
 
         for (int i = 0; i < 10; i++)
         {
@@ -73,6 +73,19 @@ public class main : MonoBehaviour
             // Push the copied card into the stack
             sScript2.Push(copiedCard);
         }
+
+        GameObject combination = Instantiate(combinationTemplate, new Vector2(1, 1), Quaternion.identity);
+        combinationScript coScript = combination.GetComponent<combinationScript>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            coScript.Push(sScript2.PullTop());
+        }
+
+        GameObject combinationStack = Instantiate(stackTemplate, new Vector2(-3,-3), Quaternion.identity);
+        stackScript cstScript = combinationStack.GetComponent<stackScript>();
+        cstScript.Push(combination);
+
 
 
 

@@ -328,6 +328,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   cardTemplate: {fileID: 4362928565338650912, guid: ebe1341423b9fd04ea02f98abe543a00, type: 3}
+  stackTemplate: {fileID: 788117984062409318, guid: 48f46ca66c77d5142a833129a5395d2f, type: 3}
+  combinationTemplate: {fileID: 481853193747997999, guid: 47ad631b2186df045bc3b5ecf4ab9a4a, type: 3}
   cardTextures:
   - {fileID: 0}
   - {fileID: 0}

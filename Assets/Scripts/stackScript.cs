@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static cardScript;
 
 public class stackScript : MonoBehaviour
 {
@@ -10,8 +11,26 @@ public class stackScript : MonoBehaviour
     public List<GameObject> cardList;
 
     public Vector3 lastPosition;
-    //public Vector2 postition;
-    
+
+    public enum DisplayType
+    {
+        TopVisible,
+        TopFlipped,
+        SpreadVisible,
+        SpreadCovered,
+        Hidden,
+    }
+    public enum StackType
+    {
+        card,
+        combination
+    }
+
+    public StackType stackType;
+    public DisplayType displayType;
+    private DisplayType displayTypeLast;
+    private bool firstPull = true;
+
     
     void Start()
     {
@@ -21,7 +40,8 @@ public class stackScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((this.transform.position) != lastPosition){
+        if ((this.transform.position) != lastPosition || displayType != displayTypeLast){
+            displayTypeLast = displayType;
             lastPosition = this.transform.position;
             OnUpdate();
         }
@@ -49,10 +69,24 @@ public class stackScript : MonoBehaviour
     
     public void Push(GameObject card)
     {
+        if (firstPull)
+        {
+            if (card.GetComponent<cardScript>() != null)
+            {
+                stackType = StackType.card;
+            }
+            else
+            {
+                stackType = StackType.combination;
+            }
+            firstPull = false;
+        }
+        
         card.transform.position = (this.transform.position); // Update Position of the Card
 
         cardList.Add(card);
         OnUpdate();
+        
 
     }
 
@@ -60,15 +94,104 @@ public class stackScript : MonoBehaviour
     {
         foreach (var card in cardList)
         {
-            card.transform.position = (this.transform.position);
-            cardScript cScript = card.GetComponent<cardScript>();
-            if (card == cardList[^1])
+            if (stackType == StackType.combination)
             {
-                cScript.isVisible = cardScript.Visible.show;
+                renderCombination();
             }
             else
             {
-                cScript.isVisible = cardScript.Visible.hide;
+                renderCards();
+            }
+        }
+    }
+    private void renderCards()
+    {
+        float offset = 0;
+        const float offsetIncrease = (float)1;
+
+        switch (displayType)
+        {
+            case DisplayType.TopVisible:
+                foreach (var card in cardList)
+                {
+                    cardScript cScript = card.GetComponent<cardScript>();
+                    card.transform.position = (this.transform.position);
+                    if (card == cardList[^1])
+                    {
+                        cScript.isVisible = cardScript.Visible.show;
+                    }
+                    else
+                    {
+                        cScript.isVisible = cardScript.Visible.hide;
+                    }
+                }
+                break;
+            case DisplayType.TopFlipped:
+                foreach (var card in cardList)
+                {
+                    cardScript cScript = card.GetComponent<cardScript>();
+                    card.transform.position = (this.transform.position);
+                    if (card == cardList[^1])
+                    {
+                        cScript.isVisible = cardScript.Visible.cover;
+                    }
+                    else
+                    {
+                        cScript.isVisible = cardScript.Visible.hide;
+                    }
+                }
+                break;
+            case DisplayType.SpreadVisible:
+                foreach (var card in cardList)
+                {
+                    cardScript cScript = card.GetComponent<cardScript>();
+
+                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z);
+                    offset += offsetIncrease;
+
+                    cScript.isVisible = cardScript.Visible.show;
+                }
+                break;
+            case DisplayType.SpreadCovered:
+                foreach (var card in cardList)
+                {
+                    cardScript cScript = card.GetComponent<cardScript>();
+
+                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z);
+                    offset += offsetIncrease;
+
+                    cScript.isVisible = cardScript.Visible.cover;
+                }
+                break;
+            case DisplayType.Hidden:
+                foreach (var card in cardList)
+                {
+                    cardScript cScript = card.GetComponent<cardScript>();
+                    card.transform.position = (this.transform.position);
+                    cScript.isVisible = cardScript.Visible.hide;
+
+                }
+                break;
+        }
+    }
+
+
+
+    private void renderCombination()
+    {
+        foreach (var combination in cardList)
+        {
+            combinationScript cScript = combination.GetComponent<combinationScript>();
+
+            combination.transform.position = (this.transform.position);
+
+            if (combination == cardList[^1])
+            {
+                cScript.visibility = combinationScript.CombinationVisibility.visible;
+            }
+            else
+            {
+                cScript.visibility = combinationScript.CombinationVisibility.hidden;
             }
         }
     }
