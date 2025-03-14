@@ -1,8 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 using static UnityEngine.Rendering.DebugUI;
-
 public class main : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -10,6 +11,7 @@ public class main : MonoBehaviour
     public GameObject cardTemplate;
     public GameObject stackTemplate;
     public GameObject combinationTemplate;
+    public GameObject playerTemplate;
     public Sprite[] cardTextures = new Sprite[56];
     public string[] cardNames = new string[56];
     public int[] cardValues = new int[56];
@@ -42,50 +44,49 @@ public class main : MonoBehaviour
             }
         }
 
-        // DEBUGGING STUFF
+        // ------------------------- Initialising pickup Stack -----------------------------------
 
-        GameObject stack = Instantiate(stackTemplate, new Vector2(-1, 0), Quaternion.identity);
+        cards = cards.OrderBy(x => Random.value).ToArray();
 
-        stackScript sScript = stack.GetComponent<stackScript>();
-
-        GameObject stack2 = Instantiate(stackTemplate, new Vector2(0, -1), Quaternion.identity);
-
-        stackScript sScript2 = stack2.GetComponent<stackScript>();
+        GameObject distributorStack = Instantiate(stackTemplate, new Vector2(0,0), Quaternion.identity);
+        stackScript distributorStackScript = distributorStack.GetComponent<stackScript>();
+        distributorStackScript.displayType = stackScript.DisplayType.TopFlipped;
 
 
-        for (int i = 0; i < 20 ; i++)
+        foreach (GameObject card in cards)
         {
-            GameObject copiedCard = cards[i];
-            cards[i] = null;
-
-
-
-            // Push the copied card into the stack
-            sScript.Push(copiedCard);
+            distributorStackScript.Push(card);
         }
 
-        for (int i = 0; i < 10; i++)
+        // ------------------------- Initialising Players -----------------------------------------
+
+        GameObject player_1 = Instantiate(playerTemplate, new Vector2(5, 3), Quaternion.identity);
+        GameObject player_2 = Instantiate(playerTemplate, new Vector2(-5, 3), Quaternion.identity);
+        GameObject player_3 = Instantiate(playerTemplate, new Vector2(5, -3), Quaternion.identity);
+        GameObject player_4 = Instantiate(playerTemplate, new Vector2(-5, -3), Quaternion.identity);
+
+        playerScript player_1_script = player_1.GetComponent<playerScript>();
+        playerScript player_2_script = player_2.GetComponent<playerScript>();
+        playerScript player_3_script = player_3.GetComponent<playerScript>();
+        playerScript player_4_script = player_4.GetComponent<playerScript>();
+
+        player_1_script.Initialise();
+        player_2_script.Initialise();
+        player_3_script.Initialise();
+        player_4_script.Initialise();
+
+        //player_1_script.inventoryScript.Push(distributorStackScript.PullTop());
+        Debug.Log(distributorStackScript.cardList.Count() / 4);
+        int cnt = distributorStackScript.cardList.Count() / 4;
+
+        for (int i = 0; i < cnt; i++)
         {
-            GameObject copiedCard = sScript.PullTop();
-
-            Debug.Log("Pulling: ", copiedCard.GetComponent<cardScript>());
-
-            // Push the copied card into the stack
-            sScript2.Push(copiedCard);
+            Debug.Log(i);
+            player_1_script.inventoryScript.Push(distributorStackScript.PullTop());
+            player_2_script.inventoryScript.Push(distributorStackScript.PullTop());
+            player_3_script.inventoryScript.Push(distributorStackScript.PullTop());
+            player_4_script.inventoryScript.Push(distributorStackScript.PullTop());
         }
-
-        GameObject combination = Instantiate(combinationTemplate, new Vector2(1, 1), Quaternion.identity);
-        combinationScript coScript = combination.GetComponent<combinationScript>();
-
-        for (int i = 0; i < 5; i++)
-        {
-            coScript.Push(sScript2.PullTop());
-        }
-
-        GameObject combinationStack = Instantiate(stackTemplate, new Vector2(-3,-3), Quaternion.identity);
-        stackScript cstScript = combinationStack.GetComponent<stackScript>();
-        cstScript.Push(combination);
-
 
 
 
@@ -155,4 +156,17 @@ public class main : MonoBehaviour
             index++;
         }
     }
+    public List<GameObject> ShuffleGameObjects(List<GameObject> objects)
+    {
+        List<GameObject> shuffledList = new List<GameObject>(objects);
+        int count = shuffledList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = Random.Range(i, count);
+            (shuffledList[i], shuffledList[randomIndex]) = (shuffledList[randomIndex], shuffledList[i]);
+        }
+        return shuffledList;
+    }
+
 }
+
