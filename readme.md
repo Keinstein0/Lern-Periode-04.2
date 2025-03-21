@@ -56,9 +56,11 @@ Heute stellte ich die Architektur der Software mit allen Notwendigen Klassen zum
 - [ ] Kombinationen Spielbar
 - [ ] Stich Holbar
 
-
-
 ## 28.3: Auspolieren
+- [ ] Am DACH sein
+- [ ] Spiel (in echt) spielen
+- [ ] 2* Powerpoints Präsentieren
+- [ ] Viele RG durchläufe machen
 
 ## 4.4: Auspolieren & Abschluss
 
