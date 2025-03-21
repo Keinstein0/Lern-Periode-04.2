@@ -30,14 +30,14 @@ Heute habe ich eine Software installiert, mit der ich Unity einfacher mit GitHub
 - [X] Hintergrund und Karten importiert
 - [X] Karten dynamisch Erzeugen
 - [X] Card Class Fertig
-- [ ] Erster Entwurf Cardstack Class
+- [X] Erster Entwurf Cardstack Class
 
 Heute konnte ich einiges über die funktionalität von Prefabs lernen. So konnte ich meine Karten mit dynamischen texturen und namen erstellen. Zur cardstack class bin ich noch nicht gekommen, denn es brauchte überraschend viel zeit den Hintergrund und die Karten zu importieren. Mein nächster schritt wird die Implementierung der Cardstack class. Dies jedoch wird viel zeit in anspruch nehmen.
 ## 7.3: Kern-Funktionalität
 
 - [X] Cardstack Class Fertig (Teil I)
 - [X] Cardstack Class Fertig (Teil II)
-- [ ] Spieler mit Inventaren Erstellt
+- [X] Spieler mit Inventaren Erstellt
 - [X] ANCHORPOINT REPARIEREN!!!!!!!!!!!!!!!!!!!!
 
 Heute erstellte ich die Cardstack klasse. Jetzt gerade habe ich versucht von einem zum nächsten Cardstack zu buchen. Dies jedoch ist aus irgendeinem grund Defekt. Die pull funktion ist jedoch erfolgreich getestet und funktioniert. Zudem habe ich alle karten die in einem stapel nicht sichtbar sind versteckt.
@@ -51,8 +51,8 @@ Heute erstellte ich die Cardstack klasse. Jetzt gerade habe ich versucht von ein
 Heute stellte ich die Architektur der Software mit allen Notwendigen Klassen zum speichern von karten fertig. Zudem konnte ich mit der Tatsächlichen umsetzung des weniger abstrakteren spiel teils beginnen. Hierfür konnte ich die Spieler erstellen und ihnen alle Karten vertelien. Ein weiterer interessanter teil wird das Spielen von karten, da es hierfür die möglichen Kombinationen kennen muss und nur gleiche Combinations stapeln lassen.
 
 ## 21.3: Architektur ausbauen
-- [ ] Kombinationen können im Inventar erstellt werden
-- [ ] Kombinationen werden validiert
+- [X] Kombinationen können im Inventar erstellt werden
+- [X] Kombinationen werden validiert
 - [ ] Kombinationen Spielbar
 - [ ] Stich Holbar
 
