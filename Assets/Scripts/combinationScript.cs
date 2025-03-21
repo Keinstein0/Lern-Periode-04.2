@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,15 @@ public class combinationScript : MonoBehaviour
         treppe, // strasse of doubles
         strasse, // values going up by one for at least 5 cards
         bombe, // 4* the same card
+        noStackValue // The Combination doens't yet have a fixed type
     }
 
     public CombinationVisibility visibility = CombinationVisibility.covered;
     private CombinationVisibility visibilityLast;
 
-    public CombinationType combinationType;
+    public CombinationType combinationType = CombinationType.noStackValue;
     public int value;
+    public int optLength; 
 
     void Start()
     {
@@ -82,12 +85,16 @@ public class combinationScript : MonoBehaviour
 
     }
 
-    public bool verifyCards()
+    public bool verifyCards(CombinationType optCombination = CombinationType.noStackValue) // WARNING: Uses limited recursion, Max depth: 2
     {
         bool valid = false;
+        optLength = 0;
         value = 0;
+
+        CombinationType combinationTypeFinal = (optCombination == CombinationType.noStackValue) ? combinationType : optCombination;
+
         
-        switch (combinationType)
+        switch (combinationTypeFinal)
         {
             case CombinationType.einzelkarte:
                 valid = cardList.Count == 1;
@@ -120,7 +127,11 @@ public class combinationScript : MonoBehaviour
                     Array.Sort(values);
                     
                     valid = values.Max() - values.Min() + 1 == values.Length && values.Distinct().Count() == values.Length;
+
+                    value = (valid) ? Value(cardList[0]) : 0;
+                    optLength = (valid) ? values.Length : 0;
                 }
+
                 break;
             case CombinationType.treppe:
                 if (cardList.Count >= 4) // Minimal amount of Cards is 5
@@ -131,10 +142,31 @@ public class combinationScript : MonoBehaviour
                     Array.Sort(values);
 
                     valid = (values.Max() - values.Min() + 1)*2 == values.Length && (values.Distinct().Count())*2 == values.Length;
+
+                    value = (valid) ? Value(cardList[0]) : 0;
+                    optLength = (valid) ? values.Length : 0;
                 }
+
                 break;
             case CombinationType.bombe:
                 valid = cardList.Count == 4 && (Value(cardList[0]) == Value(cardList[1]) && Value(cardList[0]) == Value(cardList[2]) && Value(cardList[0]) == Value(cardList[3]));
+                value = (valid) ? Value(cardList[0]) : 0;
+                break;
+            case CombinationType.noStackValue: 
+                // If the combination is Freshly created it's type gets discovered here
+                CombinationType[] allTypes = {CombinationType.einzelkarte, CombinationType.doubleKarte, CombinationType.tripleKarte, CombinationType.treppe, CombinationType.strasse, CombinationType.fullHouse, CombinationType.bombe };
+                foreach (CombinationType type in allTypes)
+                {
+                    // Loops through all types to find a match, if found it exits the function
+                    if (verifyCards(type))
+                    {
+                        valid = true;
+                        combinationType = type;
+                        break;
+                    }
+                }
+                // If no match is found it returns false (invalid combination) if one was found the type gets fixed and it returns true (combination valid)
+                valid = false;
                 break;
         }
 

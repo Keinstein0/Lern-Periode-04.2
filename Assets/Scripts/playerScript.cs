@@ -59,9 +59,9 @@ public class playerScript : MonoBehaviour
         }
 
         
-        if (Input.GetKey(KeyCode.KeypadEnter) && combinationTempScript.verifyCards())
+        if (Input.GetKey(KeyCode.Space) && combinationTempScript.verifyCards())
         {
-            Debug.Log("VERIFIED DEPOSIT");
+            Debug.Log("VERIFIED DEPOSIT    "+ combinationTempScript.combinationType);
         }
 
 
