@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static cardScript;
 
@@ -17,8 +19,22 @@ public class combinationScript : MonoBehaviour
         hidden
     }
 
+    public enum CombinationType
+    {
+        einzelkarte, // one card
+        doubleKarte, // two cards with same value
+        tripleKarte, // three cards with same value
+        fullHouse, // double + triple
+        treppe, // strasse of doubles
+        strasse, // values going up by one for at least 5 cards
+        bombe, // 4* the same card
+    }
+
     public CombinationVisibility visibility = CombinationVisibility.covered;
     private CombinationVisibility visibilityLast;
+
+    public CombinationType combinationType;
+    public int value;
 
     void Start()
     {
@@ -66,6 +82,73 @@ public class combinationScript : MonoBehaviour
 
     }
 
+    public bool verifyCards()
+    {
+        bool valid = false;
+        value = 0;
+        
+        switch (combinationType)
+        {
+            case CombinationType.einzelkarte:
+                valid = cardList.Count == 1;
+                value = valid ? Value(cardList[0]) : 0;
+                break;
+            case CombinationType.doubleKarte:
+                valid = cardList.Count == 2 && Value(cardList[0]) == Value(cardList[1]);
+                value = valid ? Value(cardList[0]) : 0;
+                break;
+            case CombinationType.tripleKarte:
+                valid = cardList.Count == 3 && (Value(cardList[0]) == Value(cardList[1]) && Value(cardList[1]) == Value(cardList[2]));
+                value = valid ? Value(cardList[0]) : 0;
+                break;
+            case CombinationType.fullHouse:
+                if (cardList.Count == 5)
+                {
+                    int[] values = new int[5];
+                    for (int i = 0; i < 5; i++) { values[i] = Value(cardList[i]); }
+                    Array.Sort(values);
+                    valid = values[0] == values[1] && values[3] == values[4] && (values[2] == values[1] || values[2] == values[3]);
+                }
+                value = valid ? Value(cardList[4]) : 0;
+                break;
+            case CombinationType.strasse:
+                if (cardList.Count >= 5) // Minimal amount of Cards is 5
+                {
+                    
+                    int[] values = new int[cardList.Count];
+                    for (int i = 0; i < cardList.Count; i++) { values[i] = Value(cardList[i]); }
+                    Array.Sort(values);
+                    
+                    valid = values.Max() - values.Min() + 1 == values.Length && values.Distinct().Count() == values.Length;
+                }
+                break;
+            case CombinationType.treppe:
+                if (cardList.Count >= 4) // Minimal amount of Cards is 5
+                {
+
+                    int[] values = new int[cardList.Count];
+                    for (int i = 0; i < cardList.Count; i++) { values[i] = Value(cardList[i]); }
+                    Array.Sort(values);
+
+                    valid = (values.Max() - values.Min() + 1)*2 == values.Length && (values.Distinct().Count())*2 == values.Length;
+                }
+                break;
+            case CombinationType.bombe:
+                valid = cardList.Count == 4 && (Value(cardList[0]) == Value(cardList[1]) && Value(cardList[0]) == Value(cardList[2]) && Value(cardList[0]) == Value(cardList[3]));
+                break;
+        }
+
+        return valid;
+    }
+
+
+    private int Value(GameObject card)
+    {
+        return card.GetComponent<cardScript>().value;
+    }
+
+
+
     private void OnUpdate()
     {
         float offset = 0;
@@ -73,7 +156,7 @@ public class combinationScript : MonoBehaviour
 
         foreach (var card in cardList)
         {
-            card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z);
+            card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z + offset);
             offset += offsetIncreste;
 
 

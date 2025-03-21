@@ -108,6 +108,8 @@ public class stackScript : MonoBehaviour
     {
         float offset = 0;
         const float offsetIncrease = (float)1;
+        float indexCounter = 0;
+
 
         switch (displayType)
         {
@@ -146,10 +148,12 @@ public class stackScript : MonoBehaviour
                 {
                     cardScript cScript = card.GetComponent<cardScript>();
 
-                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z);
+                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, indexCounter);
                     offset += offsetIncrease;
 
                     cScript.isVisible = cardScript.Visible.show;
+
+                    indexCounter++;
                 }
                 break;
             case DisplayType.SpreadCovered:
@@ -157,10 +161,12 @@ public class stackScript : MonoBehaviour
                 {
                     cardScript cScript = card.GetComponent<cardScript>();
 
-                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, this.transform.position.z);
+                    card.transform.position = new Vector3(this.transform.position.x + offset, this.transform.position.y, indexCounter);
                     offset += offsetIncrease;
 
                     cScript.isVisible = cardScript.Visible.cover;
+
+                    indexCounter++;
                 }
                 break;
             case DisplayType.Hidden:

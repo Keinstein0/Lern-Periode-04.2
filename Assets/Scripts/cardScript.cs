@@ -10,6 +10,8 @@ public class cardScript : MonoBehaviour
 
     public string name;
     public int value;
+
+    private bool wasClicked = false;
     
     public enum Visible
     {
@@ -59,4 +61,16 @@ public class cardScript : MonoBehaviour
 
         
     }
+    void OnMouseDown()
+    {
+        wasClicked = true;
+    }
+
+    public bool checkClick()
+    {
+        bool tempClick = wasClicked;
+        wasClicked = false;
+        return tempClick;
+    }
+    
 }

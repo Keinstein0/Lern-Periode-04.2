@@ -23,9 +23,14 @@ public class main : MonoBehaviour
 
     private string[] actualColors = { "red", "blue", "green", "black" };
 
+    public playerScript[] playerScripts;
+    int currentPlayer = 0;
+
 
     void Start()
     {
+        this.enabled = false;
+        
         LoadCards();
 
         for (int i = 0; i < cards.Length; i++)
@@ -75,7 +80,6 @@ public class main : MonoBehaviour
         player_3_script.Initialise();
         player_4_script.Initialise();
 
-        //player_1_script.inventoryScript.Push(distributorStackScript.PullTop());
         Debug.Log(distributorStackScript.cardList.Count() / 4);
         int cnt = distributorStackScript.cardList.Count() / 4;
 
@@ -88,6 +92,25 @@ public class main : MonoBehaviour
             player_4_script.inventoryScript.Push(distributorStackScript.PullTop());
         }
 
+        // ---------------------------- Main Game Loop ------------------------------------------------
+        Debug.Log(playerScripts.Length);
+        playerScripts = new playerScript[4];
+
+        playerScripts[0] = player_1_script;
+        playerScripts[1] = player_2_script;
+        playerScripts[2] = player_3_script;
+        playerScripts[3] = player_4_script;
+        player_1_script.OnTurnBegin();
+
+        this.enabled = true;
+
+
+
+
+       
+
+
+
 
 
     }
@@ -98,7 +121,17 @@ public class main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if (playerScripts[currentPlayer].OnTurnUpdate())
+       {
+            playerScripts[currentPlayer].OnTurnEnd();
+            currentPlayer++;
+            currentPlayer = (currentPlayer > 3 ? 0 : currentPlayer);
+            playerScripts[currentPlayer].OnTurnBegin();
+       }
         
+        
+        
+      
     }
 
 

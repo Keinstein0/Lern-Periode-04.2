@@ -101,3 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryStack: {fileID: 788117984062409318, guid: 48f46ca66c77d5142a833129a5395d2f, type: 3}
+  inventoryScript: {fileID: 0}
+  combinationTemp: {fileID: 481853193747997999, guid: 47ad631b2186df045bc3b5ecf4ab9a4a, type: 3}
+  combinationTempScript: {fileID: 0}
